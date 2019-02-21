@@ -1,0 +1,37 @@
+<html lang="en">
+ <!-- Body tag augmented with ngController directive  -->
+ <body ng-app="myApp">
+     <div ng-controller="mainController"> 
+     <script src="https://code.angularjs.org/1.6.9/angular.js"></script>
+    <h1> Ah FuckIt</h1>
+   <div>
+       Name: {{user.name}}
+   </div>
+   <div>
+       Location: {{user.location}}
+       {{first.Name}}
+   </div>
+   <div>
+       <img ng-src="{{user.avatar_url}}" title="{{user.name}}" height="100" width="100">
+   </div>
+   <div>
+       Message: {{message}}
+   </div>
+   <div>
+       Public Repos: {{user.public_repos}}
+   </div>
+</div>
+ </body>
+ <script>
+     angular.module("myApp", [] ).controller("mainController", function($scope, $http){
+         var onUserComplete = function(response){
+             $scope.user = response.data;
+         };
+         var onError = function(reason){
+             $scope.eror = "Sorry Brah!"
+         }
+         $http.get("https://api.github.com/users/shpeacock")
+         .then(onUserComplete);
+     });
+ </script>
+</html>
